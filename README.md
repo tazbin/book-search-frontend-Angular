@@ -21,11 +21,28 @@
 
 # Getting started
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.8.
+## How to install & run:
+### Using Git (recommended)
+Navigate & open CLI into the directory where you want to put this project & Clone this project (will be cloned inside myProject folder) using this command.
+   
+```bash
+git clone https://github.com/tazbin/book-search-frontend-Angular ./myProject
+```
+### Using manual download ZIP
+1. Download repository
+2. Extract the zip file, navigate into it & copy the folder to your desired directory
 
-## Development server
+### Install npm dependencies after cloning or downloading
+```bash
+npm install
+```
+
+### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```bash
+ng serve
+```
 
 
 ## Build
