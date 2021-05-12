@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" routerLink="">
+        <i class="fas fa-search"></i>
+          BookSeach
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          
+            <li class="nav-item me-2">
+                <a class="nav-link" routerLink="/" routerLinkActive="active">
+                    Home
+                </a>
+            </li>
+
+            <li class="nav-item me-2" *ngIf="(user | async)">
+                <a class="nav-link" routerLink="/favourite" routerLinkActive="active">Favourites</a>
+            </li>
+
+            <li class="nav-item me-2" *ngIf="!(user | async)">
+                <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+            </li>
+
+            <li class="nav-item me-2" *ngIf="!(user | async)">
+                <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
+            </li>
+
+            <li class="nav-item me-2">
+              <a class="nav-link" routerLink="/about" routerLinkActive="active">
+                  About
+              </a>
+          </li>
+
+          <li class="nav-item" *ngIf="(user | async)">
+            <a class="nav-link logout" style="cursor: pointer;" (click)="logout()">Logout</a>
+        </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>

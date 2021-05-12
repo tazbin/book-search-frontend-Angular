@@ -1,0 +1,114 @@
+<div class="container">
+    
+    <div *ngIf="book.err" class="mt-5">
+      <i class="fas fa-exclamation-triangle me-2"></i> {{ book.err }}!
+      <br>
+      <small class="mt-5"> Search for more books <a routerLink="">here</a> </small>
+    </div>
+
+      <p class="mt-5" *ngIf="book.loading">
+        Fetching book details...
+      </p>
+
+    <div class="row mt-5" *ngIf="book.info && !book.loading">
+
+        <div class="col-lg-4 col-sm-12 bg-light bookCover">
+            <img class="card-img-top" [src]="book.info.image" alt="Book cover">
+        </div>
+
+        <div class="col-lg-8 col-sm-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                  <h5 class="card-title"> {{ book.info.title }} </h5>
+                  <h6>
+                    {{ book.info.subtitle }}
+                  </h6>
+                  <p class="desc">
+                    {{ book.info.desc }}
+                  </p>
+                  <b>Authors:</b> {{ book.info.authors }}
+                  
+                  <div class="row mt-3">
+                    <div class="col-12 col-md-6">
+                      <ul class="list-group">
+                        <li class="list-group-item">
+                          
+                          <!-- rating -->
+                          <b class="me-2">Rating:</b> 
+                          <span class="fa fa-star" [class.checked]="book.info.rating >= 1"></span>
+                          <span class="fa fa-star" [class.checked]="book.info.rating >= 2"></span>
+                          <span class="fa fa-star" [class.checked]="book.info.rating >= 3"></span>
+                          <span class="fa fa-star" [class.checked]="book.info.rating >= 4"></span>
+                          <span class="fa fa-star" [class.checked]="book.info.rating >= 5"></span>
+                          <!-- rating -->
+
+                        </li>
+                        <li class="list-group-item">
+                          <b>Publisher:</b> {{ book.info.publisher }}
+                        </li>
+                        <li class="list-group-item">
+                          <b>Language:</b> {{ book.info.language }}
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <ul class="list-group">
+                        <li class="list-group-item">
+                          <b>Pages:</b> {{ book.info.pages }}
+                        </li>
+                        <li class="list-group-item">
+                          <b>Year:</b> {{ book.info.year }}
+                        </li>
+                        <li class="list-group-item">
+                          <b>Price:</b> {{ book.info.price }} 
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+         
+                  <div *ngIf="(user | async) && ifAdded( (user | async).favouriteBooks, book.info.isbn13 ); else showThis">
+                    <button
+                    [disabled]="addRemoveBook.loading" 
+                    class="btn btn-sm btn-dark me-2"
+                    (click)="removeFromList()"
+                    >
+                    {{
+                        addRemoveBook.loading ? 'Removing...' : 'Remove from favourite'
+                    }}
+                    </button>
+                  </div>
+        
+                  <ng-template #showThis>      
+                      <button
+                      [disabled]="addRemoveBook.loading" 
+                      class="btn btn-sm btn-dark me-2"
+                      (click)="addMovieToFavourite()" 
+                      *ngIf="(user | async); else loginBtn"
+                      >
+                      {{
+                        addRemoveBook.loading ? 'Adding...' : 'Add to favourite'
+                      }}
+                    </button>
+                    <ng-template #loginBtn>
+                      <p class="loginBtn">
+                        <a routerLink="/login">Login</a> to add this book to your favourite
+                      </p>
+                    </ng-template>
+                  </ng-template>
+
+                  <a class="btn btn-sm btn-outline-dark" [href]="book.info.url" target="_blank">
+                    View on itBook Store
+                  </a>
+
+                  <p class="mt-3">
+                    <i class="fas fa-search me-2"></i> Browse more books <a routerLink="">Here</a>
+                  </p>
+
+                  <small *ngIf="addRemoveBook.err" class="text-danger"> {{ addRemoveBook.err }} </small>
+
+                </div>
+              </div>
+        </div>
+
+    </div>
+</div>

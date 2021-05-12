@@ -1,0 +1,74 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h4><i class="fas fa-bookmark me-2"></i> My favourite list:</h4>
+    <small>
+      <i class="fas fa-search me-2"></i> Search for books from <a routerLink="/">here</a>
+    </small>
+  </div>
+</div>
+
+<div class="container mt-4">
+
+    <p class="mt-3" *ngIf="favBooks.loading">
+      Fetching favourite book list...
+    </p>
+
+    <div *ngIf="favBooks.err" class="text-danger">
+      <i class="fas fa-exclamation-triangle me-2"></i> {{ favBooks.err | titlecase }}!
+    </div>
+
+    <div class="row mt-3" *ngIf="favBooks.list && !favBooks.err">
+      
+      <p *ngIf="favBooks.list.length == 0">
+        <i class="far fa-folder-open me-2"></i> You haven't added any books to your favourite list!
+        <br>
+        <small class="mt-5"> Search for books <a routerLink="">here</a> </small>
+      </p>
+
+        <div class="col-12 col-md-4 col-lg-3 mb-3" *ngFor="let book of favBooks.list">
+
+          <div class="card mb-3" style="max-width: 100%;">
+            <div class="row g-0">
+
+              <div class="col-4 col-md-12">
+                <div class="imgCap bg-light">
+                    <img [src]="book.cover" alt="Book cover">
+                  </div>
+              </div>
+
+              <div class="col-8 col-md-12">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    {{ book.title }}
+                  </h5>
+                  <p class="card-text">
+                    <b>Authors: </b> {{ book.authors }}
+                  </p>
+
+                  <div class="container">
+                    <div class="row g-2">
+                      <div class="col-6 col-md-12 col-lg-6">
+                        <button class="btn btn-sm btn-dark" [routerLink]="['/book', book.id]" >
+                            View details
+                          </button>
+                      </div>
+                      <div class="col-6 col-md-12 col-lg-6">
+                        <button [id]="book.id" class="btn btn-sm btn-outline-dark" (click)="removeFromList(book.id)">
+                            Remove
+                          </button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+
+        </div>
+
+    </div>
+
+</div>

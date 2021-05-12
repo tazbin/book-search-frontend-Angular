@@ -1,0 +1,27 @@
+.jumbotron{
+    background-color: #e9ecef !important;
+    height: 500px;
+    padding-top: 50px;
+    margin-bottom: 50px;
+
+    h3{
+        margin-bottom: 30px;
+        i{
+            font-size: 25px;
+            color: rgb(151, 151, 151);
+        }
+    }
+
+    p{
+        font-size: 15px;
+        font-weight: 400;
+        color: #242424;
+        margin-top: 10px !important;
+        padding-left: 10px;
+        border-left: 2px solid #d1d0d0;
+
+        @media screen and (max-width: 400px) {
+            font-size: 13px !important;
+        }
+    }
+}
